@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Marker Labels</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=SUA_API_KEY"></script>
+    <script>
+      // Neste exemplo, os markers aparecem quando o usuário clica no mapa.
+      // Cada marker é rotulado com uma letra do alfabeto.
+      var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      var labelIndex = 0;
+
+      function initialize() {
+        var initialPosition = {lat: -23.524090, lng: -46.622622};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: initialPosition
+        });
+
+        // Este event listener chama addMarker() quando o mapa é clicado.
+        google.maps.event.addListener(map, 'click', function(event) {
+          addMarker(event.latLng, map);
+        });
+
+        // Adiciona um marker na posição inicial do mapa
+        addMarker(initialPosition, map);
+      }
+
+      // Adiciona um marker no mapa.
+      function addMarker(location, map) {
+        // Adiciona um marker no lugar onde foi clicado, e adiciona como label a proxima letra
+        // do array do alfabeto.
+        var marker = new google.maps.Marker({
+          position: location,
+          label: labels[labelIndex++ % labels.length],
+          map: map
+        });
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+</head>
+<body>
+<div id="map"></div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 10,
+    center: {lat: -33.9, lng: 151.2}
+  });
+
+  setMarkers(map);
+}
+
+// Dados para os markers contentdo nome, coordenadas e zIndex, que define a ordem que os ícones
+// devem ser empilhados
+var beaches = [
+  ['Bondi Beach', -33.890542, 151.274856, 4],
+  ['Coogee Beach', -33.923036, 151.259052, 5],
+  ['Cronulla Beach', -34.028249, 151.157507, 3],
+  ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+  ['Maroubra Beach', -33.950198, 151.259302, 1]
+];
+
+function setMarkers(map) {
+  var image = {
+
+    // Endereço url da imagem
+    url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+    // Esse marcador tem 20 pixels de largura e 32 de altura
+    size: new google.maps.Size(20, 32),
+    // A origem dessa imagem é (0, 0).
+    origin: new google.maps.Point(0, 0),
+    // Definindo a 'âncora' do marker no mapa
+    anchor: new google.maps.Point(0, 32)
+  };
+
+  // Shapes definem a área clickavel do ícone, Shapes são definidos por uma serie decoordenadas
+  // X,Y delimitam sua área
+  var shape = {
+    coords: [1, 1, 1, 20, 18, 20, 18, 1],
+    type: 'poly'
+  };
+  for (var i = 0; i < beaches.length; i++) {
+    var beach = beaches[i];
+    var marker = new google.maps.Marker({
+      position: {lat: beach[1], lng: beach[2]},
+      map: map,
+      icon: image,
+      shape: shape,
+      title: beach[0],
+      zIndex: beach[3]
+    });
+  }
+}
+    </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=SUA_API_KEY&callback=initMap"
+        async defer></script>
+</body>
+</html>
