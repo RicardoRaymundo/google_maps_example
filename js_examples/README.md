@@ -24,6 +24,8 @@
 ## Utilizar
 ### Hello, World
 
+![implement map](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/implement_map.png)
+
 [tutorial#The_Hello_World_of_Google_Maps_v3
 examples/map-simple](https://github.com/flutter/plugins/tree/master/packages/google_maps_flutter)
 
@@ -39,11 +41,14 @@ function initMap() {
 }
 ```
 
+
 #### Localização do usuário
 
 [https://developers.google.com/maps/documentation/javascript/geolocation](https://developers.google.com/maps/documentation/javascript/geolocation)
 
 [MDN - Geolocation.getCurrentPosition()](https://developer.mozilla.org/pt-BR/docs/Web/API/Geolocation/getCurrentPosition)
+
+![user location](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/user_location.png)
 
 ``` js
 // Para esse exemplo deve ser permitido o compartilhamento de posição do usuário pelo browser
@@ -65,6 +70,8 @@ navigator.geolocation.getCurrentPosition(function(position) {
 [Exemplo](https://codepen.io/youfoundron/pen/GIlvp) 
 [developers.google.com/maps/documentation/javascript/distancematrix](https://developers.google.com/maps/documentation/javascript/distancematrix)
 [examples/distance-matrix#try-it-yourself](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/distance-matrix#try-it-yourself) 
+
+![](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/travel_time.png)
 
 ``` js
 // Instanciando o serviço para obter tempo e distância de viagem
@@ -140,6 +147,8 @@ function(response, status) {
 [examples/marker-simple](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/marker-simple) 
 [markers#add](https://developers.google.com/maps/documentation/javascript/markers#add)
 
+![travel time](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/marker.png)
+
 ``` js
 var marker = new google.maps.Marker({
     position: myLatLng,
@@ -189,6 +198,8 @@ function toggleBounce() {
 
 [https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/marker-labels](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/marker-labels)
 
+![markers](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/markers_js.png)
+
 ``` js
  function initMap() {
 	...
@@ -211,6 +222,8 @@ function toggleBounce() {
 [markers#icons](https://developers.google.com/maps/documentation/javascript/markers#icons) 
 [examples/marker-labels](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/marker-labels)
 
+![custom icon](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/custom_icon.png)
+
 ``` js
 marker = new google.maps.Marker({
 icon: 'URL DA IMAGEM'
@@ -221,6 +234,8 @@ icon: 'URL DA IMAGEM'
 
 [markers#complex_icons](https://developers.google.com/maps/documentation/javascript/markers#complex_icons) 
 [examples/icon-complex](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/icon-complex)
+
+![complex icons](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/complex_icons.png)
 
 #### Drag and Drop
 [markers#draggable](https://developers.google.com/maps/documentation/javascript/markers#draggable) 
@@ -236,11 +251,14 @@ draggable: true,
 [symbols#add_to_marker](https://developers.google.com/maps/documentation/javascript/symbols#add_to_marker) 
 [examples/marker-symbol-custom](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/marker-symbol-custom)
 
+![svg icon](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/svg_icon.png)
 
 ### Polylines
 #### Trace uma polyline
 [shapes#polyline_add](https://developers.google.com/maps/documentation/javascript/symbols#add_to_marker)
 [examples/polyline-simple](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/marker-symbol-custom) 
+
+![polyline](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/polyline.png)
 
 ``` js
 var path = [
@@ -268,6 +286,8 @@ flightPath.setMap(null);
 #### Trace uma rota com Directions API
 [Directions API](https://developers.google.com/maps/documentation/javascript/directions#Directions) 
 [Exemplo de implementação](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/directions-travel-modes) 
+
+![route](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/route_js.png)
 
 ``` js
 function initMap() {
@@ -315,6 +335,8 @@ function initMap() {
 Os operadores de inspeção de Polygon são os mesmo que os de Polyline
 
 [shapes#polygon_add](https://developers.google.com/maps/documentation/javascript/shapes#polyline_inspect)
+
+![polygon](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/polygon.jpg)
 
 ``` js
 var paths = [
