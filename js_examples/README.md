@@ -5,7 +5,6 @@
 - [Instalar](#instalar)
 - [Utilizar](#utilizar)
 - [Aprender](#aprender)
-- [Contribuir](#contribuir)
 
 ## Instalar
 
