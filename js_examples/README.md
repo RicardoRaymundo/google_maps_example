@@ -142,6 +142,11 @@ function(response, status) {
         }
 ```
 
+#### Autocomplete de endereço
+[implementing-google-places-autocomplete-es6-part-one](https://chromatichq.com/blog/implementing-google-places-autocomplete-es6-part-one)
+
+![Autocomplete](http://blog-media.chromaticsites.com.s3.amazonaws.com/google-places-autocomplete/autocomplete-1.gif)
+
 ### Marker
 #### Crie um marcador
 [examples/marker-simple](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/marker-simple) 
