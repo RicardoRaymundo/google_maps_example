@@ -30,7 +30,7 @@ examples/map-simple](https://github.com/flutter/plugins/tree/master/packages/goo
 
 #### Instancie um mapa
 
-``` javascript
+``` js
 function initMap() { 
   var myLatLng = {lat: -25.363, lng: 131.044};
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -67,7 +67,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
 [developers.google.com/maps/documentation/javascript/distancematrix](https://developers.google.com/maps/documentation/javascript/distancematrix)
 [examples/distance-matrix#try-it-yourself](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/distance-matrix#try-it-yourself) 
 
-```
+``` js
 // Instanciando o serviço para obter tempo e distância de viagem
 var service = new google.maps.DistanceMatrixService;
        
@@ -141,7 +141,7 @@ function(response, status) {
 [examples/marker-simple](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/marker-simple) 
 [markers#add](https://developers.google.com/maps/documentation/javascript/markers#add)
 
-```
+``` js
 var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
@@ -151,13 +151,13 @@ var marker = new google.maps.Marker({
 
 #### Adicione um marcador
 
-```
+``` js
 marker.setMap(map);
 ```
 
 #### Remova todos os marcadores
 
-```
+``` js
 marker.setMap(null);
 ```
 
@@ -165,7 +165,7 @@ marker.setMap(null);
 [markers#animate](https://developers.google.com/maps/documentation/javascript/markers#animate) 
 [examples/marker-animations](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/marker-animations)
 
-```
+``` js
 marker = new google.maps.Marker({
 animation: google.maps.Animation.DROP
 });
@@ -173,7 +173,7 @@ animation: google.maps.Animation.DROP
 
 #### Evento de click
 
-```
+``` js
 marker.addListener('click', toggleBounce);
 
 function toggleBounce() {
@@ -190,7 +190,7 @@ function toggleBounce() {
 
 [https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/marker-labels](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/marker-labels)
 
-```
+``` js
  function initMap() {
 	...
 //Crie um event listener que executa addMarker() quando o mapa é clicado.
@@ -212,7 +212,7 @@ function toggleBounce() {
 [markers#icons](https://developers.google.com/maps/documentation/javascript/markers#icons) 
 [examples/marker-labels](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/marker-labels)
 
-```
+``` js
 marker = new google.maps.Marker({
 icon: 'URL DA IMAGEM'
   });
@@ -226,7 +226,7 @@ icon: 'URL DA IMAGEM'
 #### Drag and Drop
 [markers#draggable](https://developers.google.com/maps/documentation/javascript/markers#draggable) 
 
-```
+``` js
 marker = new google.maps.Marker({
 draggable: true,
 });
@@ -243,7 +243,7 @@ draggable: true,
 [shapes#polyline_add](https://developers.google.com/maps/documentation/javascript/symbols#add_to_marker)
 [examples/polyline-simple](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/marker-symbol-custom) 
 
-```
+``` js
 var path = [
     {lat: 37.772, lng: -122.214},
     {lat: 21.291, lng: -157.821},
@@ -262,7 +262,7 @@ flightPath.setMap(map);
 ```
 
 #### Remova uma polyline
-```
+``` js
 flightPath.setMap(null);
 ```
 
@@ -270,7 +270,7 @@ flightPath.setMap(null);
 [Directions API](https://developers.google.com/maps/documentation/javascript/directions#Directions) 
 [Exemplo de implementação](https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/javascript/examples/directions-travel-modes) 
 
-```
+``` js
 function initMap() {
         var directionsRenderer = new google.maps.DirectionsRenderer;
         var directionsService = new google.maps.DirectionsService;
@@ -317,7 +317,7 @@ Os operadores de inspeção de Polygon são os mesmo que os de Polyline
 
 [shapes#polygon_add](https://developers.google.com/maps/documentation/javascript/shapes#polyline_inspect)
 
-```
+``` js
 var paths = [
     {lat: 25.774, lng: -80.190},
     {lat: 18.466, lng: -66.118},
@@ -338,7 +338,7 @@ var paths = [
 
 #### Remova um polygon
 
-```
+``` js
 bermudaTriangle.setMap(null);
 ```
 
