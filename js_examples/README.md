@@ -8,6 +8,8 @@
 
 ## Instalar
 
+No final de cada arquivo de exemplo está registrado esse script que é responsável por habilitar os serviços do google maps na aplicação
+
 ``` html
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" type="text/javascript"></script>
 ```
@@ -22,6 +24,7 @@
 
 
 ## Utilizar
+
 ### Hello, World
 
 ![implement map](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/implement_map.png)
@@ -30,6 +33,7 @@
 examples/map-simple](https://github.com/flutter/plugins/tree/master/packages/google_maps_flutter)
 
 #### Instancie um mapa
+Na função `initMap()` instancie um mapa passando os argumentos de posição e o zoom iniciais.
 
 ``` js
 function initMap() { 
@@ -50,6 +54,8 @@ function initMap() {
 
 ![user location](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/user_location.png)
 
+Pegue a posição do usário com o método `navigator.geolocation.getCurrentPosition()`, passando como argumentos uma função que registra a posição e uma função com um que lida com erros.
+
 ``` js
 // Para esse exemplo deve ser permitido o compartilhamento de posição do usuário pelo browser
 navigator.geolocation.getCurrentPosition(function(position) {
@@ -64,6 +70,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
 ```
 
 #### Pegue o tempo e distância de viagem
+
 
 [distancematrix#distance_matrix_requests](https://developers.google.com/maps/documentation/javascript/distancematrix#distance_matrix_requests) 
 [distance-matrix/#DistanceMatrixService](https://developers.google.com/maps/documentation/javascript/reference/distance-matrix/#DistanceMatrixService)
