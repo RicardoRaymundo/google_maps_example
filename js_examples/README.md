@@ -80,6 +80,9 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
 ![](https://github.com/RicardoRaymundo/google_maps_example/blob/master/js_examples/images/travel_time.png)
 
+Obtenha os dados de tempo e distancia de viagem instanciando DistanceMatrixService e passando como argumentos para o mesmo 
+
+
 ``` js
 // Instanciando o serviço para obter tempo e distância de viagem
 var service = new google.maps.DistanceMatrixService;
