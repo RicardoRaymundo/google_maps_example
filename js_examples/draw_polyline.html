@@ -32,9 +32,6 @@
     </style>
 </head>
 <body>
-
-<!--
-
 <div id="floating-panel">
     <b>Mode of Travel: </b>
     <select id="mode">
@@ -44,8 +41,6 @@
         <option value="TRANSIT">Transit</option>
     </select>
 </div>
--->
-
 <div id="map"></div>
 <script>
       function initMap() {
@@ -67,15 +62,14 @@
 
         /* Cria um observador que monitora o seletor do modo de viagem.
          * Quando o modo de viagem é alterado, a rota é re-calculada*/
-       // document.getElementById('mode').addEventListener('change', function() {
-       //   calculateAndDisplayRoute(directionsService, directionsRenderer);
-       // });
+        document.getElementById('mode').addEventListener('change', function() {
+          calculateAndDisplayRoute(directionsService, directionsRenderer);
+        });
       }
 
 
       function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-        // var selectedMode = document.getElementById('mode').value;
-        var selectedMode = "DRIVING";
+        var selectedMode = document.getElementById('mode').value;
 
        /* Esta função realiza o cálculo de rota, ela recebe dois parâmetros: request e callback.
         * O parâmetro 1 é o request que é enviado ao serviço Directions
@@ -94,7 +88,7 @@
       }
     </script>
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaXztrN0JV_x0I27jHHPYIo6jPDI0bEzM&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=SUA_API_KEY&callback=initMap">
 </script>
 </body>
 </html>
