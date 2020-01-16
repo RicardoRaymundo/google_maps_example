@@ -31,7 +31,7 @@
         </activity>
 
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="SUA_API_KEY"/>
+            android:value="AIzaSyCaXztrN0JV_x0I27jHHPYIo6jPDI0bEzM"/>
 
     </application>
     <uses-permission android:name= "android.permission.ACCESS_COARSE_LOCATION"/>

@@ -61,6 +61,8 @@ class _UserLocationState extends State<UserLocation> {
     /// Atualiza constantemente a ultima posição do usuário
     this.location.onLocationChanged().listen((LocationData currentLocation) {
       this.lastUserPosition = LatLng(currentLocation.latitude, currentLocation.longitude);
+      print(currentLocation.latitude);
+      print(currentLocation.longitude);
     });
   }
 

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
@@ -21,18 +22,20 @@ class _MarkersState extends State<Markers> {
   /// Conjunto de markers
   final Set<Marker> _markers = {};
 
+
   void _onAddMarkerButtonPressed() async {
+    await getAdress(_lastMapPosition);
     setState(() {
       _markers.add(Marker(
         // This marker id can be anything that uniquely identifies each marker.
         markerId: MarkerId(_lastMapPosition.toString()),
         position: _lastMapPosition,
         infoWindow: InfoWindow(
-          title: 'Really cool place',
-          snippet: '5 Star Rating -> Latitude:' +
-              _lastMapPosition.latitude.toString() +
-              ' Longitude: ' +
-              _lastMapPosition.longitude.toString(),
+          title: _city,
+          snippet: _street + ', ' +
+              _number +
+              ', ' +
+              _neighborhood,
         ),
         icon: BitmapDescriptor.defaultMarker,
       ));
@@ -45,6 +48,22 @@ class _MarkersState extends State<Markers> {
 
   void _onMapCreated(GoogleMapController controller) {
     _googleMapController.complete(controller);
+  }
+
+  /// Variáveis que guardam o endereço
+  String _street;
+  String _number;
+  String _neighborhood;
+  String _city;
+
+  getAdress(LatLng position) async {
+    List<Placemark> placemark = await Geolocator().placemarkFromCoordinates(position.latitude, position.longitude);
+    print('>>>>ADRESS<<<<');
+    print(placemark[0].toJson());
+    _street = placemark[0].thoroughfare;
+    _number = placemark[0].subLocality;
+    _neighborhood = placemark[0].name;
+    _city = placemark[0].subAdministrativeArea;
   }
 
   @override

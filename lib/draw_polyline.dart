@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_map_polyline/google_map_polyline.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -17,7 +18,7 @@ class _DrawPolylineState extends State<DrawPolyline> {
   Completer<GoogleMapController> _googleMapController = Completer();
 
   /// Recebe a google API Directions
-  GoogleMapPolyline _googleMapPolyline = GoogleMapPolyline(apiKey: "SUA_API_KEY");
+  GoogleMapPolyline _googleMapPolyline = GoogleMapPolyline(apiKey: "AIzaSyCaXztrN0JV_x0I27jHHPYIo6jPDI0bEzM");
 
   /// Definindo a primeira posição da variável
   LatLng _lastMapPosition = _center;
@@ -30,21 +31,44 @@ class _DrawPolylineState extends State<DrawPolyline> {
 
   int _polylineCount = 1;
 
+
+
   void _onAddMarkerButtonPressed() async {
+    await getAdress(_lastMapPosition);
     setState(() {
       _markers.add(Marker(
         // This marker id can be anything that uniquely identifies each marker.
         markerId: MarkerId(_lastMapPosition.toString()),
         position: _lastMapPosition,
         infoWindow: InfoWindow(
-          title: 'Really cool place',
-          snippet: '5 Star Rating',
+          title: _city,
+          snippet: _street + ', ' +
+              _number +
+              ', ' +
+              _neighborhood,
         ),
         icon: BitmapDescriptor.defaultMarker,
       ));
     });
     _markers.length > 1 ? await _getPolylinesWithLocation(_markers.length - 2, _markers.length - 1) : null;
   }
+
+  /// Variáveis que guardam o endereço
+  String _street;
+  String _number;
+  String _neighborhood;
+  String _city;
+
+  getAdress(LatLng position) async {
+    List<Placemark> placemark = await Geolocator().placemarkFromCoordinates(position.latitude, position.longitude);
+    print('>>>>ADRESS<<<<');
+    print(placemark[0].toJson());
+    _street = placemark[0].thoroughfare;
+    _number = placemark[0].subLocality;
+    _neighborhood = placemark[0].name;
+    _city = placemark[0].subAdministrativeArea;
+  }
+
 
   void _onCameraMove(CameraPosition position) {
     _lastMapPosition = position.target;

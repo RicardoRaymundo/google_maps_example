@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Travel Modes in Directions</title>
+    <style>
+		#right-panel {
+			font-family: 'Roboto', 'sans-serif';
+			line-height: 30px;
+			padding-left: 10px;
+		}
+
+		/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+		#map {
+			height: 100%;
+		}
+
+		/* Optional: Makes the sample page fill the window. */
+		html,
+		body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		#right-panel select,
+		#right-panel input {
+			font-size: 20px;
+		}
+
+		#right-panel select {
+			width: 100%;
+		}
+
+		#right-panel i {
+			font-size: 17px;
+		}
+
+		#right-panel {
+			float: right;
+			width: 30%;
+			padding-left: 2%;
+		}
+
+		#output {
+			font-size: 16px;
+		}
+
+		#floating-panel {
+			position: absolute;
+			top: 10px;
+			left: 25%;
+			z-index: 5;
+			background-color: #fff;
+			padding: 5px;
+			border: 1px solid #999;
+			text-align: center;
+			font-family: 'Roboto', 'sans-serif';
+			line-height: 30px;
+			padding-left: 10px;
+		}
+	</style>
+</head>
+
+<body>
+<div id="floating-panel">
+    <b>Mode of Travel: </b>
+    <select id="mode">
+        <option value="DRIVING">Driving</option>
+        <option value="WALKING">Walking</option>
+        <option value="BICYCLING">Bicycling</option>
+        <option value="TRANSIT">Transit</option>
+    </select>
+</div>
+<div id="right-panel">
+    <div>
+        <strong>Results</strong>
+    </div>
+    <div id="output"></div>
+</div>
+<div id="map"></div>
+<script>
+		var origins;
+    var destinations;
+    var locations;
+		function initMap()  {
+
+        var bounds = new google.maps.LatLngBounds;
+        var markersArray = [];
+/*
+        locations = [{lat: -23.5677552, lng: -46.7183694},{lat: -23.6507056, lng: -46.6215427}, {lat: -23.588313, lng: -46.659502}];
+        origins = locations;
+        console.log("ORIGENS: ", origins);
+        origins.splice(0, 1);
+        console.log("ORIGENS: ", origins);
+
+        destinations = locations;
+        console.log("DESTINOS: ", destinations);
+        destinations.splice(-1, 1);
+        console.log("DESTINOS: ", destinations);
+*/
+       /* Definindo os pontos de origem e destino tanto por coordenadas de latitude e longitude
+        * quanto por endereço */
+        origins = [{lat: -23.5677552, lng: -46.7183694}, {lat: -23.6507056, lng: -46.6215427}];
+        destinations = [{lat: -23.6507056, lng: -46.6215427}, {lat: -23.588313, lng: -46.659502}];
+        var locationsx = origins.concat(destinations);
+        console.log("LOCATIONS:", locationsx);
+        var set = new Set(locationsx);
+        locations = Array.from(set);
+        console.log("LOCATIONS FROM SET:", locations);
+        console.log('AAAAAAAAAA?', {lat: -23.6507056, lng: -46.6215427} == {lat: -23.6507056, lng: -46.6215427})
+
+        // Instanciando o geocoder para converter coordenadas para enderecos
+        var geocoder = new google.maps.Geocoder;
+
+        // Instanciando o serviço 'DistanceMatrixService' para o cálculo de distancia de tempo de viagem
+        var distanceMatrixService = new google.maps.DistanceMatrixService;
+
+       /* É um objeto de configuração de DistanceMatrixRequest, que define
+        * pontos de origem, destino e outras opções -> (https://developers.google.com/maps/documentation/javascript/reference/distance-matrix#DistanceMatrixRequest)
+        */
+        var distanceMatrixRequest = {
+          origins: origins,
+          destinations: destinations,
+          travelMode: 'DRIVING',
+          unitSystem: google.maps.UnitSystem.METRIC,
+          avoidHighways: false,
+          avoidTolls: false
+        };
+               /* Função callback que recebe 'DistanceMatrixResponse' e 'DistanceMatrixStatus' após
+        * completar o DistanceMatrixRequest. Nesta função é possivel realizar a
+        * manipulação/formatação dos dados à partir de um objeto recebido pelo response
+        */
+        var callback = function(response, status) {
+          if (status !== 'OK') {
+            alert('Error was: ' + status);
+          } else {
+
+         console.log(response);
+
+            // Registrando os enderecos de origem e destino recebidos pela response
+            var originList = response.originAddresses;
+            var destinationList = response.destinationAddresses;
+            var outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '';
+            deleteMarkers(markersArray);
+
+            // Adicionando os markers e definindo o autozoom
+            var showGeocodedAddressOnMap = function() {
+
+              return function(results, status) {
+                if (status === 'OK') {
+                  map.fitBounds(bounds.extend(results[0].geometry.location));
+                  print(results);
+                } else {
+                  alert('Geocode was not successful due to: ' + status);
+                }
+              };
+            };
+
+            // Dispondo as respostas da query no HTML
+            for (var i = 0; i < originList.length; i++) {
+              var results = response.rows[i].elements;
+              geocoder.geocode({'address': originList[i]},
+                  showGeocodedAddressOnMap(false));
+              for (var j = 0; j < results.length; j++) {
+                geocoder.geocode({'address': destinationList[j]},
+                    showGeocodedAddressOnMap(true));
+                outputDiv.innerHTML += originList[i] + ' to ' + destinationList[j] +
+                    ': ' + results[j].distance.text + ' in ' +
+                    results[j].duration.text + '<br>';
+              }
+            }
+          }
+        };
+        // Executando o comando 'getDistanceMatrix' para obter a distancia de tempo de viagem
+        distanceMatrixService.getDistanceMatrix(distanceMatrixRequest, callback);
+
+        /* Instanciando o DirectionsRenderer, que renderiza as rotas obtidas
+         * pelo DirectionsService, também instanciado */
+        var directionsRenderer = new google.maps.DirectionsRenderer;
+        var directionsService = new google.maps.DirectionsService;
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: {lat: 37.77, lng: -122.447}
+        });
+
+        // Atribui o mapa deste exemplo ao DirectionsRenderer
+        directionsRenderer.setMap(map);
+
+        for(locations in origins) {
+             console.log('aaa')
+         }
+        calculateAndDisplayRoute(directionsService, directionsRenderer);
+
+        /* Cria um observador que monitora o seletor do modo de viagem.
+         * Quando o modo de viagem é alterado, a rota é re-calculada*/
+        document.getElementById('mode').addEventListener('change', function() {
+          calculateAndDisplayRoute(directionsService, directionsRenderer);
+        });
+      }
+
+
+      function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+        var selectedMode = document.getElementById('mode').value;
+
+       /* Esta função realiza o cálculo de rota, ela recebe dois parâmetros: request e callback.
+        * O parâmetro 1 é o request que é enviado ao serviço Directions
+        */
+        directionsService.route({
+          origin: origins[0],  // Instituto butanta
+          destination: destinations[0],  // Zoológico de SP.
+          travelMode: google.maps.TravelMode[selectedMode]
+        }, function(response, status) {
+          if (status == 'OK') {
+            directionsRenderer.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+      function deleteMarkers(markersArray) {
+        for (var i = 0; i < markersArray.length; i++) {
+          markersArray[i].setMap(null);
+        }
+        markersArray = [];
+      }
+	</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=SUA_API_KEY&callback=initMap">
+</script>
+</body>
+
+</html>

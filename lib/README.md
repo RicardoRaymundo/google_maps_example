@@ -155,7 +155,7 @@ getTravelDistance() async {
          .latitude}%2C${_markers
          .elementAt(0)
          .position
-         .longitude}%7C&key=SUA_API_KEY"
+         .longitude}%7C&key=AIzaSyCaXztrN0JV_x0I27jHHPYIo6jPDI0bEzM"
  );
 /// Resposta do http request, teste e veja os dados recebidos
 print(response.data);
