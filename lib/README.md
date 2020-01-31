@@ -390,8 +390,58 @@ void _remove() {
 }
 ```
 
+### Geolocator
+[Biblioteca Geolocator](https://pub.dev/packages/geolocator)
+#### Pegue a localização por coordenadas ou endereço
+[pub.dev/packages/geolocator#geocoding](https://pub.dev/packages/geolocator#geocoding)
+##### Por endereço:
+``` dart
+  /// Variáveis que guardam o endereço
+  String _street;
+  String _number;
+  String _neighborhood;
+  String _city;
+  double _latitude;
+  double _longitude;
 
- 
+  /// address = "Av Leão Machado, 100 - Jaguaré, São Paulo"
+  getAdress(String address) async {
+    List<Placemark> placemark = await Geolocator().placemarkFromAddress(address);
+    print('>>>>ADRESS<<<<');
+    print(placemark[0].toJson());
+    _street = placemark[0].thoroughfare;
+    _number = placemark[0].subLocality;
+    _neighborhood = placemark[0].name;
+    _city = placemark[0].subAdministrativeArea;
+    _latitude = placemark[0].position.latitude;
+    _longitude = placemark[0].position.longitude;
+  }
+```
+
+##### Por coordenadas:
+``` dart
+  /// Variáveis que guardam o endereço
+  String _street;
+  String _number;
+  String _neighborhood;
+  String _city;
+  
+  /// position = LatLng(-23.531140, -46.720788)
+  getAdressFromCoordinates(LatLng position) async {
+    List<Placemark> placemark = await Geolocator().placemarkFromCoordinates(position.latitude, position.longitude);
+    _street = placemark[0].thoroughfare;
+    _number = placemark[0].subLocality;
+    _neighborhood = placemark[0].name;
+    _city = placemark[0].subAdministrativeArea;
+  }
+```
+
+##### Resultado:
+Ambos os métodos retornam `List<Placemark>`, então ao executar `print(placemark[0].toJson())` obteremos:
+
+```
+ I/flutter ( 6159): {name: 100, isoCountryCode: BR, country: Brasil, postalCode: 05328-020, administrativeArea: São Paulo, subAdministrativeArea: São Paulo, locality: , subLocality: Jaguaré, thoroughfare: Avenida Leão Machado, subThoroughfare: 100, position: Lat: -23.5474428, Long: -46.7570686}
+```
 ## Aprender
 - [Introdução a Google maps api](https://www.devmedia.com.br/introducao-a-google-maps-api/26967)
 - [8 alternativas poderosas para Google maps api](https://mundoapi.com.br/apis-publicadas/8-alternativas-poderosas-para-a-api-do-google-maps/)
