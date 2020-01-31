@@ -439,9 +439,8 @@ void _remove() {
 ##### Resultado:
 Ambos os métodos retornam `List<Placemark>`, então ao executar `print(placemark[0].toJson())` obteremos:
 
-```
- I/flutter ( 6159): {name: 100, isoCountryCode: BR, country: Brasil, postalCode: 05328-020, administrativeArea: São Paulo, subAdministrativeArea: São Paulo, locality: , subLocality: Jaguaré, thoroughfare: Avenida Leão Machado, subThoroughfare: 100, position: Lat: -23.5474428, Long: -46.7570686}
-```
+![](https://github.com/RicardoRaymundo/google_maps_example/blob/master/lib/images/get_address_result.png)
+
 ## Aprender
 - [Introdução a Google maps api](https://www.devmedia.com.br/introducao-a-google-maps-api/26967)
 - [8 alternativas poderosas para Google maps api](https://mundoapi.com.br/apis-publicadas/8-alternativas-poderosas-para-a-api-do-google-maps/)
