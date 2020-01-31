@@ -18,7 +18,7 @@ class _DrawPolylineState extends State<DrawPolyline> {
   Completer<GoogleMapController> _googleMapController = Completer();
 
   /// Recebe a google API Directions
-  GoogleMapPolyline _googleMapPolyline = GoogleMapPolyline(apiKey: "AIzaSyCaXztrN0JV_x0I27jHHPYIo6jPDI0bEzM");
+  GoogleMapPolyline _googleMapPolyline = GoogleMapPolyline(apiKey: "SUA_API_KEY");
 
   /// Definindo a primeira posição da variável
   LatLng _lastMapPosition = _center;
